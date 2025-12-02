@@ -6,6 +6,7 @@ Encoding: UTF-8
 Imports: 
     dplyr,
     here,
+    quarto,
     readxl,
     stringr,
     tarchetypes,
