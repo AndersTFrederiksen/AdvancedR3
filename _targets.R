@@ -57,6 +57,8 @@ list(
   ),
   tar_target(
     name = lipidomics,
-    command = read.csv(file)
+    command = read.csv(file,
+
+                       show_col_types = FALSE)
   )
 )
