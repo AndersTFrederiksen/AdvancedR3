@@ -54,5 +54,9 @@ list(
     name = file,
     command = "data/lipidomics.csv",
     format = "file"
+  ),
+  tar_target(
+    name = lipidomics,
+    command = read.csv(file)
   )
 )
