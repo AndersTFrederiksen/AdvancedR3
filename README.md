@@ -4,7 +4,7 @@ TODO: Add more to the title of your project here
 
 TODO: Give a brief description of what your project is about
 
-This project...
+This project is about making automated pipeline workflows.
 
 # Brief description of folder and file contents
 
@@ -13,16 +13,16 @@ data, docs and R folders.
 
 The following folders contain:
 
--   `data/`:
--   `docs/`:
--   `R/`:
+-   `data/`: The dataset used for analysis in this project
+-   `docs/`: The qmd file for learing about project setup
+-   `R/`: R scripts used for analysis in this project
 
 # Installing project R package dependencies
 
 If dependencies have been managed by using
 `usethis::use_package("packagename")` through the `DESCRIPTION` file,
-installing dependencies is as easy as opening the
-`AdvancedR3.Rproj` file and running this command in the console:
+installing dependencies is as easy as opening the `AdvancedR3.Rproj`
+file and running this command in the console:
 
 ```         
 # install.packages("pak")
