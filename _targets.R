@@ -58,6 +58,11 @@ list(
   tar_target(
     name = lipidomics,
     command = readr::read_csv(file,
-                       show_col_types = FALSE)
+      show_col_types = FALSE
+    )
+  ),
+  tar_quarto(
+    name = quato_doc,
+    path = "docs/learning.qmd"
   )
 )
