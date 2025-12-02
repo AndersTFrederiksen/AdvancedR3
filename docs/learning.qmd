@@ -1,0 +1,19 @@
+---
+title: "Draft Quarto document"
+author: "Your Name"
+format: html
+---
+
+## Header 1
+
+```{r setup}
+#| include: false
+```
+
+```{r}
+# Code chunk
+readr::read_csv(here::here("data/lipidomics.csv"))
+usethis::use_git_ignore("data-raw/nmr-omics/")
+
+```
+
