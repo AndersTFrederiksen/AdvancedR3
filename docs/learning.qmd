@@ -15,19 +15,6 @@ lipidomics <- tar_read(lipidomics)
 source(here::here("R/functions.R"))
 ```
 
-```{r}
-# Code chunk
-readr::read_csv(here::here("data/lipidomics.csv"))
-usethis::use_git_ignore("data-raw/nmr-omics/")
-```
-
-## Creating table
-
-```{r}
-create_table_descriptive_stats(lipidomics) |>
-  knitr::kable()
-```
-
 ## Results: basic stats table
 
 ```{r}
@@ -40,5 +27,5 @@ tar_read(table_descriptive_stats) |>
 ## Plot of distributions
 
 ```{r}
-create_plot_distributions(lipidomics)
+tar_read(plot_distributions)
 ```

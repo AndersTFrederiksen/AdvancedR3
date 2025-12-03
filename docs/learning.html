@@ -148,116 +148,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>lipidomics <span class="ot">&lt;-</span> <span class="fu">tar_read</span>(lipidomics)</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"R/functions.R"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Code chunk</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/lipidomics.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 504 Columns: 6
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (4): code, gender, class, metabolite
-dbl (2): age, value
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 504 × 6
-   code   gender   age class metabolite                value
-   &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;                     &lt;dbl&gt;
- 1 ERI109 M         25 CT    TMS (internal standard)  208.  
- 2 ERI109 M         25 CT    Cholesterol               19.8 
- 3 ERI109 M         25 CT    Lipid CH3- 1              44.1 
- 4 ERI109 M         25 CT    Lipid CH3- 2             147.  
- 5 ERI109 M         25 CT    Cholesterol               27.2 
- 6 ERI109 M         25 CT    Lipid -CH2-              587.  
- 7 ERI109 M         25 CT    FA -CH2CH2COO-            31.6 
- 8 ERI109 M         25 CT    PUFA                      29.0 
- 9 ERI109 M         25 CT    Phosphatidylethanolamine   6.78
-10 ERI109 M         25 CT    Phosphatidycholine        41.7 
-# ℹ 494 more rows</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>usethis<span class="sc">::</span><span class="fu">use_git_ignore</span>(<span class="st">"data-raw/nmr-omics/"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>✔ Setting active project to "C:/Min Data/Ph.D/Repreducible Ressearch in
-  R/AdvancedR3".</code></pre>
-</div>
-</div>
-</section>
-<section id="creating-table" class="level2">
-<h2 class="anchored" data-anchor-id="creating-table">Creating table</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">create_table_descriptive_stats</span>(lipidomics) <span class="sc">|&gt;</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Metabolite</th>
-<th style="text-align: left;">Mean SD</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">CDCl3 (solvent)</td>
-<td style="text-align: left;">180 (66.96)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Cholesterol</td>
-<td style="text-align: left;">18.64 (11.39)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">FA -CH2CH2COO-</td>
-<td style="text-align: left;">33.63 (7.85)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Lipid -CH2-</td>
-<td style="text-align: left;">536.63 (61.86)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Lipid CH3- 1</td>
-<td style="text-align: left;">98.28 (73.83)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Lipid CH3- 2</td>
-<td style="text-align: left;">168.19 (29.2)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">MUFA+PUFA</td>
-<td style="text-align: left;">32.9 (16.12)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">PUFA</td>
-<td style="text-align: left;">30.03 (24.09)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Phosphatidycholine</td>
-<td style="text-align: left;">31.75 (20.46)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Phosphatidylethanolamine</td>
-<td style="text-align: left;">10.03 (7.57)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Phospholipids</td>
-<td style="text-align: left;">2.65 (2.6)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">TMS (internal standard)</td>
-<td style="text-align: left;">123.02 (130.41)</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
 </section>
 <section id="results-basic-stats-table" class="level2">
 <h2 class="anchored" data-anchor-id="results-basic-stats-table">Results: basic stats table</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_read</span>(table_descriptive_stats) <span class="sc">|&gt;</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"The mean and standard deviation of metabolites in the lipidomics dataset."</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_read</span>(table_descriptive_stats) <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"The mean and standard deviation of metabolites in the lipidomics dataset."</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
 <caption>The mean and standard deviation of metabolites in the lipidomics dataset.</caption>
@@ -324,14 +222,14 @@ dbl (2): age, value
 <section id="plot-of-distributions" class="level2">
 <h2 class="anchored" data-anchor-id="plot-of-distributions">Plot of distributions</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">create_plot_distributions</span>(lipidomics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_read</span>(plot_distributions)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="learning_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="learning_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
