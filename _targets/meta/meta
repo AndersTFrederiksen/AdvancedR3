@@ -1,4 +1,4 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
 file|stem|c44b806f3841f535|09442fac263aded2|2c530c1562a7fbd1|1735323524|data/lipidomics.csv|t20411.6048765611s|s24277b|24277|file|local|vector|||0||
 lipidomics|stem|1a7ca689988d502e|0adf46d83f39a429|e88672c19d0c6d6c|-1498393010||t20424.5865609469s|s4884b|4884|rds|local|vector|||0.27||
-quato_doc|stem|9793dc0a9863d9d9|7d7691b957727962|479dd385a8d088bc|168462990|docs/learning.html*docs/learning.qmd|t20424.6188374434s|s23932b|23932|file|local|vector|||5.31|pakke 'quarto' blev bygget under R version 4.5.2|
+quato_doc|stem|50ba8417ca476743|7d7691b957727962|479dd385a8d088bc|168462990|docs/learning.html*docs/learning.qmd|t20425.3612778902s|s29918b|29918|file|local|vector|||6.26|pakke 'quarto' blev bygget under R version 4.5.2|

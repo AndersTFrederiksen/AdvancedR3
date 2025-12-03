@@ -2,7 +2,6 @@
 title: "Draft Quarto document"
 author: "Your Name"
 format: html
---- %>% %>% %>% 
 ---
 
 ## Header 1
