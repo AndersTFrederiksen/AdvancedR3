@@ -61,9 +61,31 @@ clean <- function(data) {
 #' @returns A dataframe
 #'
 Preprocess <- function(data) {
-data |>
-  dplyr::mutate(
-    class = as.factor(class),
-    value = scale(value)
-  )
+  data |>
+    dplyr::mutate(
+      class = as.factor(class),
+      value = scale(value)
+    )
+}
+
+
+#' Title: Fit the model
+#'
+#' @param data
+#' @param metabol
+#'
+#' @returns
+#'
+regress <- function(data, model, metabol) {
+  stats::glm(
+    formula = model,
+    data = data,
+    family = binomial(link = "logit")
+  ) |>
+    broom::tidy(exponentiate = T) |>
+    dplyr::mutate(
+      metabolite = unique(metabol),
+      model = format(model),
+      .before = everything()
+    )
 }

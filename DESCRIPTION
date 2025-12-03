@@ -11,6 +11,7 @@ Imports:
     here,
     quarto,
     readxl,
+    stats,
     stringr,
     tarchetypes,
     targets,

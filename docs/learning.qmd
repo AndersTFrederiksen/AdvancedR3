@@ -39,15 +39,7 @@ just_cholesterol <- lipidomics |>
 ```
 
 ```{r}
-glm(
-  formula = class ~ value,
-  data = just_cholesterol,
-  family = binomial(link = "logit")
-) |>
-  broom::tidy(exponentiate = T) |>
-  mutate(
-    metabolite = unique(just_cholesterol$metabolite),
-    model = format(class ~ value),
-    .before = everything()
-  )
+the_model <- class ~ value
+
+regress(just_cholesterol,the_model, just_cholesterol$metabolite)
 ```
