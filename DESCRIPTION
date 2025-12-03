@@ -5,13 +5,15 @@ Version: 0.0.1
 Encoding: UTF-8
 Imports: 
     dplyr,
+    glue,
     here,
     quarto,
     readxl,
     stringr,
     tarchetypes,
     targets,
-    tidyr
+    tidyr,
+    tidyselect
 Suggests: 
     gitcreds,
     styler,
