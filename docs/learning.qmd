@@ -29,3 +29,25 @@ tar_read(table_descriptive_stats) |>
 ```{r}
 tar_read(plot_distributions)
 ```
+
+## Preprocessing
+
+```{r}
+just_cholesterol <- lipidomics |>
+  filter(metabolite == "Cholesterol") |>
+  Preprocess()
+```
+
+```{r}
+glm(
+  formula = class ~ value,
+  data = just_cholesterol,
+  family = binomial(link = "logit")
+) |>
+  broom::tidy(exponentiate = T) |>
+  mutate(
+    metabolite = unique(just_cholesterol$metabolite),
+    model = format(class ~ value),
+    .before = everything()
+  )
+```

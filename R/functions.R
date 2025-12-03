@@ -41,3 +41,29 @@ create_plot_distributions <- function(data) {
     ggplot2::theme_minimal()
 }
 
+#' Title Creating a clean format of the lipidomics dataset
+#'
+#' @param data
+#'
+#' @returns A clean dataframe
+#'
+clean <- function(data) {
+  data |>
+    dplyr::group_by(dplyr::pick(-value)) |>
+    dplyr::summarise(value = mean(value), .groups = "keep") |>
+    dplyr::ungroup()
+}
+
+#' Title: Preprocessing the data
+#'
+#' @param data
+#'
+#' @returns A dataframe
+#'
+Preprocess <- function(data) {
+data |>
+  dplyr::mutate(
+    class = as.factor(class),
+    value = scale(value)
+  )
+}
