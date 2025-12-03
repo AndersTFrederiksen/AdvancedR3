@@ -238,27 +238,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="preprocessing" class="level2">
 <h2 class="anchored" data-anchor-id="preprocessing">Preprocessing</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>lipidomics <span class="sc">|&gt;</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(metabolite <span class="sc">==</span> <span class="st">"Cholesterol"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">class =</span> <span class="fu">as.factor</span>(class),</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">value =</span> <span class="fu">scale</span>(value)</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">create_model_results</span>(lipidomics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 36 × 6
-   code   gender   age class metabolite  value[,1]
-   &lt;chr&gt;  &lt;chr&gt;  &lt;dbl&gt; &lt;fct&gt; &lt;chr&gt;           &lt;dbl&gt;
- 1 ERI109 M         25 CT    Cholesterol  0.000164
- 2 ERI111 M         39 CT    Cholesterol  0.405   
- 3 ERI140 M         25 T1D   Cholesterol -0.912   
- 4 ERI142 M         38 T1D   Cholesterol -0.617   
- 5 ERI143 M         43 T1D   Cholesterol -1.85    
- 6 ERI144 M         35 T1D   Cholesterol  0.0187  
- 7 ERI145 M         36 T1D   Cholesterol -0.351   
- 8 ERI146 M         38 T1D   Cholesterol -0.133   
- 9 ERI147 W         37 T1D   Cholesterol -0.518   
-10 ERI149 W         35 T1D   Cholesterol -0.651   
-# ℹ 26 more rows</code></pre>
+<pre><code># A tibble: 2 × 7
+  metabolite  model         term        estimate std.error statistic p.value
+  &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+1 Cholesterol class ~ value (Intercept)     1.02     0.364    0.0425  0.966 
+2 Cholesterol class ~ value value           2.65     0.450    2.17    0.0300</code></pre>
 </div>
 </div>
 </section>
