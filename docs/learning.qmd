@@ -24,7 +24,7 @@ usethis::use_git_ignore("data-raw/nmr-omics/")
 
 ```{r}
 source(here::here("R/functions.R"))
-create_table_descriptive_stats(lipidomics) %>%
+create_table_descriptive_stats(lipidomics) |>
   knitr::kable()
 ```
 
@@ -40,11 +40,6 @@ tar_read(table_descriptive_stats) |>
 ## Plot of distributions
 
 ```{r}
-ggplot(
-  lipidomics,
-  aes(x = as.numeric(value))
-) +
-  geom_histogram() +
-  facet_wrap(vars(metabolite), scales = "free") +
-  theme_minimal()
+create_plot_distributions(lipidomics) |>
+  knitr::kable()
 ```
