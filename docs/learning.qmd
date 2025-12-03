@@ -12,6 +12,7 @@ library(targets)
 tar_config_set(store = here::here("_targets"))
 source(here::here("R/functions.R"))
 lipidomics <- tar_read(lipidomics)
+source(here::here("R/functions.R"))
 ```
 
 ```{r}
@@ -23,7 +24,6 @@ usethis::use_git_ignore("data-raw/nmr-omics/")
 ## Creating table
 
 ```{r}
-source(here::here("R/functions.R"))
 create_table_descriptive_stats(lipidomics) |>
   knitr::kable()
 ```
@@ -40,6 +40,5 @@ tar_read(table_descriptive_stats) |>
 ## Plot of distributions
 
 ```{r}
-create_plot_distributions(lipidomics) |>
-  knitr::kable()
+create_plot_distributions(lipidomics)
 ```

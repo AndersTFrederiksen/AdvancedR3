@@ -34,9 +34,10 @@ create_table_descriptive_stats <- function(data) {
 create_plot_distributions <- function(data) {
   ggplot2::ggplot(
     data,
-    aes(x = as.numeric(value))
+    ggplot2::aes(x = value)
   ) +
     ggplot2::geom_histogram() +
-    ggplot2::facet_wrap(vars(metabolite), scales = "free") +
+    ggplot2::facet_wrap(ggplot2::vars(metabolite), scales = "free") +
     ggplot2::theme_minimal()
 }
+
