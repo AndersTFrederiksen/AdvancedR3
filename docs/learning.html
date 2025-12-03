@@ -183,36 +183,84 @@ dbl (2): age, value
 </div>
 </div>
 </section>
-<section id="making-a-table" class="level2">
-<h2 class="anchored" data-anchor-id="making-a-table">Making a table</h2>
+<section id="creating-table" class="level2">
+<h2 class="anchored" data-anchor-id="creating-table">Creating table</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># options(pillar.sigfig = 2)</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># lipidomics %&gt;%</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   group_by(metabolite) %&gt;%</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   summarise(</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co">#     across(</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co">#       value,</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">#       list(</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">#         mean = mean,</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co">#         sd = sd</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co">#       )</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co">#     )</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) %&gt;%</span></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(across(</span></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co">#     where(is.numeric),</span></span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co">#     \(x) round(x, digits = 2)</span></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   )) %&gt;%</span></span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   mutate(MeanSD = glue::glue("{value_mean} ({value_sd})")) %&gt;%</span></span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="co">#   select(Metabolite = metabolite, "Mean SD" = MeanSD)</span></span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a><span class="co">#   knitr::kable()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"R/functions.R"</span>))</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">create_table_descriptive_stats</span>(lipidomics) <span class="sc">%&gt;%</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"R/functions.R"</span>))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">create_table_descriptive_stats</span>(lipidomics) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Metabolite</th>
+<th style="text-align: left;">Mean SD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">CDCl3 (solvent)</td>
+<td style="text-align: left;">180 (66.96)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Cholesterol</td>
+<td style="text-align: left;">18.64 (11.39)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FA -CH2CH2COO-</td>
+<td style="text-align: left;">33.63 (7.85)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lipid -CH2-</td>
+<td style="text-align: left;">536.63 (61.86)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Lipid CH3- 1</td>
+<td style="text-align: left;">98.28 (73.83)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Lipid CH3- 2</td>
+<td style="text-align: left;">168.19 (29.2)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MUFA+PUFA</td>
+<td style="text-align: left;">32.9 (16.12)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">PUFA</td>
+<td style="text-align: left;">30.03 (24.09)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Phosphatidycholine</td>
+<td style="text-align: left;">31.75 (20.46)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Phosphatidylethanolamine</td>
+<td style="text-align: left;">10.03 (7.57)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Phospholipids</td>
+<td style="text-align: left;">2.65 (2.6)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">TMS (internal standard)</td>
+<td style="text-align: left;">123.02 (130.41)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="results-basic-stats-table" class="level2">
+<h2 class="anchored" data-anchor-id="results-basic-stats-table">Results: basic stats table</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_read</span>(table_descriptive_stats) <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"The mean and standard deviation of metabolites in the lipidomics dataset."</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>The mean and standard deviation of metabolites in the lipidomics dataset.</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Metabolite</th>

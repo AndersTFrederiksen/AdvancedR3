@@ -20,33 +20,31 @@ readr::read_csv(here::here("data/lipidomics.csv"))
 usethis::use_git_ignore("data-raw/nmr-omics/")
 ```
 
-## Making a table
-
-```{r}
-# options(pillar.sigfig = 2)
-# lipidomics %>%
-#   group_by(metabolite) %>%
-#   summarise(
-#     across(
-#       value,
-#       list(
-#         mean = mean,
-#         sd = sd
-#       )
-#     )
-#   ) %>%
-#   mutate(across(
-#     where(is.numeric),
-#     \(x) round(x, digits = 2)
-#   )) %>%
-#   mutate(MeanSD = glue::glue("{value_mean} ({value_sd})")) %>%
-#   select(Metabolite = metabolite, "Mean SD" = MeanSD)
-
-#   knitr::kable()
-```
+## Creating table
 
 ```{r}
 source(here::here("R/functions.R"))
 create_table_descriptive_stats(lipidomics) %>%
   knitr::kable()
+```
+
+## Results: basic stats table
+
+```{r}
+tar_read(table_descriptive_stats) |>
+  knitr::kable(
+    caption = "The mean and standard deviation of metabolites in the lipidomics dataset."
+  )
+```
+
+## Plot of distributions
+
+```{r}
+ggplot(
+  lipidomics,
+  aes(x = as.numeric(value))
+) +
+  geom_histogram() +
+  facet_wrap(vars(metabolite), scales = "free") +
+  theme_minimal()
 ```
