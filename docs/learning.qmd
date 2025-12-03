@@ -2,11 +2,13 @@
 title: "Draft Quarto document"
 author: "Your Name"
 format: html
+--- %>% %>% %>% 
 ---
 
 ## Header 1
 
 ```{r setup}
+library(tidyverse)
 library(targets)
 tar_config_set(store = here::here("_targets"))
 source(here::here("R/functions.R"))
@@ -17,10 +19,29 @@ lipidomics <- tar_read(lipidomics)
 # Code chunk
 readr::read_csv(here::here("data/lipidomics.csv"))
 usethis::use_git_ignore("data-raw/nmr-omics/")
-
 ```
 
-## This is poorly formatted
+## Making a table
 
--   Definitely should have en empty space above this list.
--   This isn't a list, why not?
+```{r}
+options(pillar.sigfig = 2)
+lipidomics %>%
+  group_by(metabolite) %>%
+  summarise(
+    across(
+      value,
+      list(
+        mean = mean,
+        sd = sd
+      )
+    )
+  ) %>%
+  mutate(across(
+    where(is.numeric),
+    \(x) round(x, digits = 2)
+  )) %>%
+  mutate(MeanSD = glue::glue("{value_mean} ({value_sd})")) %>%
+  select(Metabolite = metabolite, "Mean SD" = MeanSD)
+
+#   knitr::kable()
+```

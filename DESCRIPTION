@@ -18,3 +18,5 @@ Suggests:
     usethis
 URL: https://github.com/AndersTFrederiksen/AdvancedR3
 BugReports: https://github.com/AndersTFrederiksen/AdvancedR3/issues
+Depends: 
+    tidyverse
