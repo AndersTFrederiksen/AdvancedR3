@@ -1,4 +1,3 @@
-```{r}
 #' Title: Function making descriptive table
 #'
 #' @param data
