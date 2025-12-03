@@ -76,16 +76,30 @@ Preprocess <- function(data) {
 #'
 #' @returns
 #'
-regress <- function(data, model, metabol) {
+regress <- function(data, model) {
   stats::glm(
     formula = model,
     data = data,
     family = binomial(link = "logit")
   ) |>
-    broom::tidy(exponentiate = T) |>
+    broom::tidy(exponentiate = TRUE) |>
     dplyr::mutate(
-      metabolite = unique(metabol),
+      metabolite = unique(data$metabolite),
       model = format(model),
       .before = everything()
     )
+}
+
+#' Title Creates table with model results for cholesterol
+#'
+#' @param data
+#'
+#' @returns 2x7 table with model info
+#'
+
+create_model_results <- function(data) {
+  data |>
+    dplyr::filter(metabolite == "Cholesterol") |>
+    Preprocess() |>
+    regress(class ~ value)
 }

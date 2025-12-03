@@ -33,13 +33,8 @@ tar_read(plot_distributions)
 ## Preprocessing
 
 ```{r}
-just_cholesterol <- lipidomics |>
-  filter(metabolite == "Cholesterol") |>
-  Preprocess()
+create_model_results(lipidomics)
 ```
 
 ```{r}
-the_model <- class ~ value
-
-regress(just_cholesterol,the_model, just_cholesterol$metabolite)
 ```
