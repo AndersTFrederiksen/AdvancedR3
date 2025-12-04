@@ -97,9 +97,41 @@ regress <- function(data, model) {
 #' @returns 2x7 table with model info
 #'
 
-create_model_results <- function(data) {
+create_model_results <- function(data, metabol) {
   data |>
-    dplyr::filter(metabolite == "Cholesterol") |>
+    dplyr::filter(metabolite == metabol) |>
     Preprocess() |>
     regress(class ~ value)
+}
+
+
+#' Title: Fit all models
+#'
+#' @param data
+#'
+#' @returns¨A datafrane
+#'
+fit_all_models <- function(data) {
+  list(
+    class ~ value,
+    class ~ value + age + gender
+  ) |>
+    purrr::map(\(model) regress(data, model = model)) |>
+    purrr::list_rbind()
+}
+
+
+#' Title
+#'
+#' @param data
+#'
+#' @returns A dataframe
+#'
+
+total_models <- function(data, metabolites) {
+  data |>
+    group_split(metabolites) |>
+    purrr::map(Preprocess) |>
+    purrr::map(fit_all_models) |>
+    purrr::list_rbind()
 }

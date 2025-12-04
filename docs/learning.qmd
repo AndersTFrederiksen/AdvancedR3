@@ -30,8 +30,31 @@ tar_read(table_descriptive_stats) |>
 tar_read(plot_distributions)
 ```
 
-## Preprocessing
+## Preprocessing & model results
 
 ```{r}
-create_model_results(lipidomics)
+cholest <- "Cholesterol"
+create_model_results(lipidomics, metabol = cholest)
+```
+
+## Running multiple models
+
+```{r}
+just_cholesterol <- lipidomics |>
+  filter(metabolite == "Cholesterol") |>
+  Preprocess()
+
+fit_all_models(just_cholesterol)
+
+lipidomics |>
+  filter(metabolite == cholest) |>
+  Preprocess() |>
+  fit_all_models()
+
+```
+
+## Fitiing all metabolites
+
+```{r}
+total_models(lipidomics)
 ```

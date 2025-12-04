@@ -76,6 +76,6 @@ list(
   ),
   tar_target(
     name = create_model,
-    command = create_model_results(lipidomics)
+    command = create_model_results(lipidomics, metabol == cholest)
   )
 )
