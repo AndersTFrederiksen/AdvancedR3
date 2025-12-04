@@ -56,5 +56,5 @@ lipidomics |>
 ## Fitiing all metabolites
 
 ```{r}
-total_models(lipidomics)
+total_models(lipidomics, metabolite)
 ```

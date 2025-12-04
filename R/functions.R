@@ -128,9 +128,9 @@ fit_all_models <- function(data) {
 #' @returns A dataframe
 #'
 
-total_models <- function(data, metabolites) {
+total_models <- function(data, metal) {
   data |>
-    group_split(metabolites) |>
+    dplyr::group_split({{metal}}) |>
     purrr::map(Preprocess) |>
     purrr::map(fit_all_models) |>
     purrr::list_rbind()

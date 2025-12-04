@@ -235,16 +235,91 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="preprocessing" class="level2">
-<h2 class="anchored" data-anchor-id="preprocessing">Preprocessing</h2>
+<section id="preprocessing-model-results" class="level2">
+<h2 class="anchored" data-anchor-id="preprocessing-model-results">Preprocessing &amp; model results</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">create_model_results</span>(lipidomics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>cholest <span class="ot">&lt;-</span> <span class="st">"Cholesterol"</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">create_model_results</span>(lipidomics, <span class="at">metabol =</span> cholest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 7
   metabolite  model         term        estimate std.error statistic p.value
   &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
 1 Cholesterol class ~ value (Intercept)     1.02     0.364    0.0425  0.966 
 2 Cholesterol class ~ value value           2.65     0.450    2.17    0.0300</code></pre>
+</div>
+</div>
+</section>
+<section id="running-multiple-models" class="level2">
+<h2 class="anchored" data-anchor-id="running-multiple-models">Running multiple models</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>just_cholesterol <span class="ot">&lt;-</span> lipidomics <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(metabolite <span class="sc">==</span> <span class="st">"Cholesterol"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Preprocess</span>()</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">fit_all_models</span>(just_cholesterol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 7
+  metabolite  model                   term  estimate std.error statistic p.value
+  &lt;chr&gt;       &lt;chr&gt;                   &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+1 Cholesterol class ~ value           (Int…    1.02     0.364     0.0425  0.966 
+2 Cholesterol class ~ value           value    2.65     0.450     2.17    0.0300
+3 Cholesterol class ~ value + age + … (Int…    1.11     1.29      0.0817  0.935 
+4 Cholesterol class ~ value + age + … value    2.97     0.458     2.38    0.0175
+5 Cholesterol class ~ value + age + … age      1.01     0.0377    0.183   0.855 
+6 Cholesterol class ~ value + age + … gend…    0.493    0.779    -0.907   0.365 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>lipidomics <span class="sc">|&gt;</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(metabolite <span class="sc">==</span> cholest) <span class="sc">|&gt;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Preprocess</span>() <span class="sc">|&gt;</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit_all_models</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 7
+  metabolite  model                   term  estimate std.error statistic p.value
+  &lt;chr&gt;       &lt;chr&gt;                   &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+1 Cholesterol class ~ value           (Int…    1.02     0.364     0.0425  0.966 
+2 Cholesterol class ~ value           value    2.65     0.450     2.17    0.0300
+3 Cholesterol class ~ value + age + … (Int…    1.11     1.29      0.0817  0.935 
+4 Cholesterol class ~ value + age + … value    2.97     0.458     2.38    0.0175
+5 Cholesterol class ~ value + age + … age      1.01     0.0377    0.183   0.855 
+6 Cholesterol class ~ value + age + … gend…    0.493    0.779    -0.907   0.365 </code></pre>
+</div>
+</div>
+</section>
+<section id="fitiing-all-metabolites" class="level2">
+<h2 class="anchored" data-anchor-id="fitiing-all-metabolites">Fitiing all metabolites</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">total_models</span>(lipidomics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: glm.fit: algorithm did not converge</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: glm.fit: algorithm did not converge</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred
+Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 72 × 7
+   metabolite      model              term  estimate std.error statistic p.value
+   &lt;chr&gt;           &lt;chr&gt;              &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+ 1 CDCl3 (solvent) class ~ value      (Int…   0.779     0.453    -0.552  0.581  
+ 2 CDCl3 (solvent) class ~ value      value   0.112     0.818    -2.68   0.00746
+ 3 CDCl3 (solvent) class ~ value + a… (Int…   0.855     1.57     -0.0995 0.921  
+ 4 CDCl3 (solvent) class ~ value + a… value   0.0870    0.865    -2.82   0.00475
+ 5 CDCl3 (solvent) class ~ value + a… age     0.981     0.0478   -0.412  0.680  
+ 6 CDCl3 (solvent) class ~ value + a… gend…   3.18      0.943     1.23   0.220  
+ 7 Cholesterol     class ~ value      (Int…   1.02      0.364     0.0425 0.966  
+ 8 Cholesterol     class ~ value      value   2.65      0.450     2.17   0.0300 
+ 9 Cholesterol     class ~ value + a… (Int…   1.11      1.29      0.0817 0.935  
+10 Cholesterol     class ~ value + a… value   2.97      0.458     2.38   0.0175 
+# ℹ 62 more rows</code></pre>
 </div>
 </div>
 </section>
