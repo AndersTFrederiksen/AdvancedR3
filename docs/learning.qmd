@@ -44,16 +44,5 @@ targets::tar_read(run_all) |>
 ```{r}
 model_results <- targets::tar_read(run_all)
 
-model_results |> 
-  filter(term =="value", std.error <= 2, estimate <= 5) |> 
-  select(metabolite, model, estimate, std.error) |> 
-  ggplot(aes(
-    x = estimate,
-    y = metabolite, 
-    xmin = estimate - std.error,
-    xmax = estimate + std.error
-  )) +
-  geom_pointrange() +
-  geom_vline(xintercept =1, linetype ="dashed") +
-  facet_grid(cols = vars(model))
+targets::tar_read(plot_model_results)
 ```

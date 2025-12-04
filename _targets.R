@@ -77,6 +77,9 @@ list(
   tar_target(
     name = run_all,
     command = total_models(lipidomics, metabolite)
-
+  ),
+  tar_target(
+    name = plot_model_results,
+    command = create_plot_model_results(run_all)
   )
 )
