@@ -35,6 +35,3 @@ tar_read(plot_distributions)
 ```{r}
 create_model_results(lipidomics)
 ```
-
-```{r}
-```
