@@ -75,7 +75,8 @@ list(
     command = create_plot_distributions(lipidomics)
   ),
   tar_target(
-    name = create_model,
-    command = create_model_results(lipidomics, metabol == cholest)
+    name = run_all,
+    command = total_models(lipidomics, metabolite)
+
   )
 )

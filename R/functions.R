@@ -97,14 +97,6 @@ regress <- function(data, model) {
 #' @returns 2x7 table with model info
 #'
 
-create_model_results <- function(data, metabol) {
-  data |>
-    dplyr::filter(metabolite == metabol) |>
-    Preprocess() |>
-    regress(class ~ value)
-}
-
-
 #' Title: Fit all models
 #'
 #' @param data
@@ -121,7 +113,9 @@ fit_all_models <- function(data) {
 }
 
 
-#' Title
+#' Title: Split dataframe in 12 subsets based opn metabolite,
+#' clean dataframes using Preprocess and fit the two models to all metabolites
+#' Finally combine everything in one single dataframe
 #'
 #' @param data
 #'
@@ -130,7 +124,7 @@ fit_all_models <- function(data) {
 
 total_models <- function(data, metal) {
   data |>
-    dplyr::group_split({{metal}}) |>
+    dplyr::group_split({{ metal }}) |>
     purrr::map(Preprocess) |>
     purrr::map(fit_all_models) |>
     purrr::list_rbind()
